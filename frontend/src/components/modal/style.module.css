@@ -1,0 +1,93 @@
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 66;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100vw;
+
+  animation-name: modalOpen;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+
+  z-index: 67;
+}
+
+@keyframes modalOpen {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.modal .closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.modalContent {
+  margin-bottom: 20px;
+}
+
+.modal .actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal .actions button {
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.6rem;
+  padding: 10px 20px;
+  margin-left: 10px;
+}
+
+.modal .actions button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.modal .actions button:active {
+  background-color: var(--color-primary-darker);
+}
+
+.modal .actions button:first-child {
+  background-color: var(--color-secondary);
+}
+
+.modal .actions button:first-child:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.modal .actions button:first-child:active {
+  background-color: var(--color-secondary-darker);
+}
+

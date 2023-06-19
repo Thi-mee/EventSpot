@@ -1,0 +1,268 @@
+/* gpt4 */
+
+/* .loading-container {
+
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.loading-cube {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  transform-style: preserve-3d;
+  animation: spinCube 4s ease-in-out infinite;
+}
+
+@keyframes spinCube {
+  from {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(360deg) rotateY(720deg);
+  }
+}
+
+.loading-side {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+}
+
+.loading-front {
+  background-color: purple;
+  transform: translateZ(25px);
+}
+
+.loading-back {
+  background-color: purple;
+  transform: rotateY(180deg) translateZ(25px);
+}
+
+.loading-right {
+  background-color: purple;
+  transform: rotateY(90deg) translateZ(25px);
+}
+
+.loading-left {
+  background-color: purple;
+  transform: rotateY(-90deg) translateZ(25px);
+}
+
+.loading-top {
+  background-color: purple;
+  transform: rotateX(90deg) translateZ(25px);
+}
+
+.loading-bottom {
+  background-color: purple;
+  transform: rotateX(-90deg) translateZ(25px);
+} */
+
+/* .loading-sphere {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% -10px); */
+
+
+/* ==================================== Bard ===================================== */
+/* .loading-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.loading-cube {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #000000;
+}
+
+.loading-side {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.loading-front {
+  top: 0;
+  left: 0;
+}
+
+.loading-back {
+  bottom: 0;
+  left: 0;
+}
+
+.loading-right {
+  top: 0;
+  right: 0;
+}
+
+.loading-left {
+  bottom: 0;
+  right: 0;
+}
+
+.loading-top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loading-bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loading-sphere {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  animation: loading-sphere 2s infinite linear;
+}
+
+@keyframes loading-sphere {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(50px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+} */
+
+
+/* ==================================== GPT3 ===================================== */
+
+.loading-page-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999999999999999;
+  width: 100%;
+  height: 100%;
+  background: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.loading-container {
+  position: relative;
+  width: 200px; /* Adjust the width and height as needed */
+  height: 200px;
+  margin: 0 auto;
+}
+
+.loading-cube {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%) rotateX(45deg) rotateY(45deg);
+  width: 100px;
+  height: 100px;
+  animation: rotate 3s infinite linear;
+}
+
+.loading-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #9c5daa;
+  opacity: 0.7;
+  border: 1px solid #74477e;
+}
+
+.loading-front {
+  transform: translateZ(50px);
+}
+
+.loading-back {
+  transform: translateZ(-50px);
+}
+
+.loading-right {
+  transform: rotateY(90deg) translateZ(50px);
+}
+
+.loading-left {
+  transform: rotateY(-90deg) translateZ(50px);
+}
+
+.loading-top {
+  transform: rotateX(90deg) translateZ(50px);
+}
+
+.loading-bottom {
+  transform: rotateX(-90deg) translateZ(50px);
+}
+
+.loading-sphere {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-image: linear-gradient(to bottom, #c72abaaf, #641f5e) ;
+  opacity: 0.7;
+  animation: orbit 3s infinite linear;
+}
+
+.loading-sphere-1 {
+  animation-delay: -0.5s;
+}
+
+.loading-sphere-2 {
+  animation-delay: -1s;
+}
+
+.loading-sphere-3 {
+  animation-delay: -1.5s;
+}
+
+.loading-sphere-4 {
+  animation-delay: -2s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateX(45deg) rotateY(45deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateX(45deg) rotateY(405deg);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: translate(-50%, -50%) rotateY(0deg) translateZ(200px);
+  }
+  50% {
+    z-index: -1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateY(360deg) translateZ(200px);
+  }
+}

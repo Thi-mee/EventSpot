@@ -1,13 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500&family=Source+Sans+Pro:wght@400;600&family=Dancing+Script:wght@700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-white: #f3f3f3;
+  --color-primary: hsl(287, 68%, 31%);
+  --color-primary-light: hsl(287, 86%, 38%);
+  --color-primary-lighter: hsl(287, 79%, 61%);
+  --color-primary-dark: hsl(287, 92%, 15%);
+
+  --color-danger: #dc2b2b;
+  --color-danger-50: hsla(0, 72%, 52%, 0.5);
+  --color-danger-40: hsla(0, 72%, 52%, 0.4);
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+  --color-light: #f8f9fa;
+  --color-dark: #343a40;
+
+  --font-title: 'Source Sans Pro', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+  --font-logo: 'Dancing Script', cursive;
+
+  --nav-height: 60px;
+}
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1.6rem;
+  background-color: var(--color-white);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+
+.ctab {
+  display: inline-block;
+  padding: .5em 1em;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.ctab-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: 1px solid var(--color-primary);
+}
+
+.ctab-sm {
+  padding: .3em .7em;
+  font-size: 1.4rem;
+}
+
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.LoginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.RegisterPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.ctn-flex {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.ctn-flex.equal-children > * {
+  flex: 1;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+
+.errorAlert {
+  padding: .7em;
+  border-radius: 5px;
+  background-color: var(--color-danger-40);
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+
+::selection {
+  background-color: var(--color-primary-lighter);
+  color: var(--color-white);
 }

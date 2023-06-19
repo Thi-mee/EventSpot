@@ -1,0 +1,121 @@
+
+:root {
+  /* --active: #383eab;
+  --inactive: #6f8dd3; */
+  --inactive: #ccc;
+  --active: var(--color-primary);
+}
+
+#time_wrapper {
+  width: fit-content;
+  position: relative;
+  /* top: 150px; */
+  /* border: 1px solid red; */
+}
+
+#time_input {
+  border: 2px solid var(--inactive);
+  width: fit-content;
+  color: #869cc2;
+  display: flex;
+  align-items: center;
+}
+
+#time_wrapper input {
+  width: 50px;
+  height: 46px;
+  border: none;
+  box-sizing: border-box;
+  padding-top: 12px;
+  text-align: center;
+  color: #132c14;
+}
+
+#time_wrapper label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+#time_wrapper .label {
+  font-size: 0.9rem;
+  position: absolute;
+  top: 4.5px;
+}
+
+#time_wrapper .label.lbl-hrs {
+  left: 13px;
+}
+
+#time_wrapper .label.lbl-min {
+  left: 9px;
+}
+
+#time_wrapper .label.lbl-sec {
+  left: 11px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+#time_wrapper input::-webkit-outer-spin-button,
+#time_wrapper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+#time_wrapper input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+#time_input,
+#time_wrapper input {
+  border-radius: 8px;
+  font-size: 1.5rem;
+}
+
+#time_wrapper input:focus {
+  outline: 2px solid var(--active);
+}
+
+#time_wrapper input:focus + .label {
+  color: var(--active);
+}
+
+#time_wrapper input.invalid:focus {
+  outline: 3px solid red;
+}
+
+#time_wrapper input.invalid:focus + .label {
+  color: red;
+}
+
+#time_wrapper span:not(.label) {
+  font-size: 3rem;
+}
+
+.dateWrapper {
+  /* border:  2px solid var(--inactive); */
+  /* border-radius: 8px; */
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+  /* border: 1px solid red; */
+}
+
+.dateWrapper input {
+  border: none;
+  border: 2px solid var(--inactive);
+  border-radius: 8px;
+  font-size: 1.5rem;
+  padding: 10px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+}
+.dateWrapper input:focus,
+.dateWrapper input:active {
+  outline: none;
+  border: 2px solid var(--active);
+}

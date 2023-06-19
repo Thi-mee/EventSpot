@@ -1,0 +1,76 @@
+.h1 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+
+.progress {
+  --progress-bar-color: #583298;
+  --progress-background-color: #dad3e0;
+  width: 95%;
+  margin: 25px auto 60px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--progress-background-color);
+  position: relative;
+}
+
+.progress__bar {
+  height: 100%;
+  border-radius: 5px;
+  background-color: var(--progress-bar-color);
+  transition: width 0.5s ease-in-out;
+  /* border: 1px solid red; */
+}
+
+.progress__steps {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}
+
+.progress__step {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0de;
+  /* margin-right: 10px; */
+  cursor: pointer;
+  position: relative;
+  /* border: 1px solid red; */
+}
+
+.progress__step.active {
+  background-color: var(--progress-bar-color);
+}
+
+.progress__step__number {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
+.progress__step__title {
+  font-size: 10px;
+  color: #2f0541;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  position: absolute;
+  top: 110%;
+}

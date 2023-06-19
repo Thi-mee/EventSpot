@@ -1,0 +1,108 @@
+
+.eventPage hgroup {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.eventPage hgroup h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.eventPage hgroup p {
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: #666;
+}
+
+
+.eventPage h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-block: 1rem;
+  text-transform: capitalize;
+}
+
+.eventGrid p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #555;
+  margin-block: 1rem;
+  line-height: 1.4;
+}
+
+
+
+
+
+
+
+
+
+.eventGrid {
+  width: 90%;
+  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; 
+}
+
+.eventGrid .imgCtn {
+  width: 100%;
+  /* height: 100%; */
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+
+}
+
+.eventGrid .imgCtn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+
+.eventGrid .imgCtn:hover img {
+  transform: scale(1.1);
+}
+
+.paginationControls {
+  width: fit-content;
+  padding: .5em 2em;
+  text-align: center;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 0.5em;
+  box-shadow: 0 3px 0.5rem rgba(179, 97, 193, 0.3);
+}
+
+.paginationControls button {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #666;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: .5em;
+  width: 3.5em;
+  height: 3.5em;
+}
+
+.paginationControls button:hover {
+  color: #000;
+}
+
+.paginationControls button:focus {
+  outline: none;
+}
+
+.paginationControls button.active {
+  background-color: var(--color-primary);
+  color: #fff;
+}

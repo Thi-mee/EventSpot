@@ -1,0 +1,294 @@
+.AppLayoutGrid {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 20rem 1fr 1fr;
+  grid-template-areas: "sidebar header header" "sidebar main main" "footer footer footer";
+  min-height: 100vh;
+}
+.AppLayoutGrid > header {
+  grid-area: header;
+}
+.AppLayoutGrid > aside {
+  grid-area: sidebar;
+}
+.AppLayoutGrid > main {
+  grid-area: main;
+}
+.AppLayoutGrid > footer {
+  grid-area: footer;
+}
+
+.AppLayoutFlex {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.AppLayoutFlex > header {
+  flex: 0 0 auto;
+}
+
+.AppLayoutFlex > main {
+  flex: 1 0 auto;
+}
+
+.AppLayoutFlex > footer {
+  flex: 0 0 auto;
+}
+
+.navbar {
+  position: sticky;
+  -webkit-position: sticky;
+  top: 0;
+  background-color:var(--color-white) ;
+  color: var(--color-primary);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 99999;
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .logo h1 {
+  margin: 0;
+} */
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.nav .greeting {
+  font-size: 1.4rem;
+  color: #777;
+}
+
+.nav .greeting span {
+  font-weight: 700;
+  color: #000;
+}
+
+
+.dropdownCtn {
+  position: relative;
+}
+
+.nav .avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.nav .avatar .icon {
+  font-size: 3.5rem;
+  color: #777;
+  pointer-events: none;
+}
+
+.dropdownCtn .dropdown {
+  position: absolute;
+  top: 105%;
+  right: 0;
+  z-index: 100000;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  /* opacity: 0;
+  visibility: hidden; */
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+
+.avatar:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.dropdown ul li a {
+  display: block;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.sidebar {
+  position: relative;
+  background-color: var(--color-white);
+  color: var(--color-white);
+  box-shadow:  0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 99999;
+}
+
+.sidebar .positioner {
+  position: sticky;
+  top: 0;
+  padding: 1rem 2rem 1rem;
+}
+
+.sidebar .logo a {
+  text-decoration: none;
+}
+
+.sidebar .logo a h1 {
+  margin: 0 0 2rem 0;
+  color: var(--color-primary);
+  font-family: var(--font-logo);
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.sidebar ul a {
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  font-size: 1.6rem;
+  padding: 1rem .5rem;
+  gap: 1rem;
+  transition: padding-left 0.3s ease;
+}
+
+.sidebar ul a.active {
+  position: relative;
+  background-color: #e4e4e4;
+  padding-left: 1em;
+}
+
+.sidebar a.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--color-primary);
+}
+
+
+
+
+
+/* .sidebar .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+} */
+
+
+
+
+
+
+
+.footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+
+.AppMain {
+  padding: 2rem;
+}
+
+
+
+.Flex {
+  display: flex;
+}
+
+.Flex.justify-between {
+  justify-content: space-between;
+}
+
+.Flex.align-center {
+  align-items: center;
+}
+
+.Flex.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.Flex.gap-1 {
+  gap: 1rem;
+}
+
+.Flex.gap-2 {
+  gap: 2rem;
+}
+
+.Flex.gap-3 {
+  gap: 3rem;
+}
+
+.Flex.gap-4 {
+  gap: 4rem;
+}
+
+.Flex.gap-5 {
+  gap: 5rem;
+}
+
+.Flex.gap-6 {
+  gap: 6rem;
+}

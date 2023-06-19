@@ -1,11 +1,12 @@
+import LoadingPage from "./components/loading/LoadingPage";
 import AppRoutes from "./routes/AppRoutes";
-import { AuthProvider } from "./providers/AuthProvider";
+
 
 function App() {
-  return (
-    <AuthProvider>
-      <AppRoutes />
-    </AuthProvider>
+  return (<>
+    <LoadingPage/>
+    <AppRoutes />
+  </>
   );
 }
 

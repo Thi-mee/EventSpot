@@ -1,0 +1,114 @@
+
+.textField,
+.selectField {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.textField label,
+.selectField label,
+.dateField label,
+.timeField label {
+  color: #444d;
+  width: fit-content;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.textField label.required,
+.selectField label.required,
+.dateField label.required,
+.timeField label.required {
+  position: relative;
+}
+
+.textField label.required::after,
+.selectField label.required::after,
+.dateField label.required::after,
+.timeField label.required::after {
+  content: "*";
+  color: #dc2b2b;
+  position: absolute;
+  top: 0;
+  right: -10px;
+}
+
+.textField textarea {
+  min-height: 50px;
+  height: 60px;
+  width: 100%;
+  resize: none;
+}
+
+.textField input,
+.textField textarea,
+.selectField select {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  padding: 10px;
+}
+
+.textField input:focus,
+.textField textarea:focus,
+.selectField select:focus {
+  outline: 1px solid var(--color-primary);
+}
+
+.textField input::placeholder,
+.textField textarea::placeholder,
+.selectField select {
+  color: #999;
+  font-weight: normal;
+}
+
+.selectField select:focus,
+.selectField select:valid {
+  color: #000;
+}
+
+.textField .errorText,
+.selectField .errorText {
+  color: #dc2b2b;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 3px 0 0;
+  height: 20px;
+}
+
+.checkboxField {
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.timeField,
+.dateField {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+  width: fit-content;
+  display: inline-block;
+  /* border: 1px solid red; */
+}
+
+.fullWidth {
+  flex-basis: 100%;
+}
+
+.halfWidth {
+  flex-basis: 50%;
+}
+
+.thirdWidth {
+  flex-basis: 33.33%;
+}
+
+.fourthWidth {
+  flex-basis: 25%;
+}
+
