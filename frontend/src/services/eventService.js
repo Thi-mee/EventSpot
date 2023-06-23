@@ -51,6 +51,22 @@ const getEvent = async (id) => {
   }
 };
 
+const getEventG = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+    const endPoint = `${process.env.REACT_APP_API_URL}/events/${id}/guest`
+    const response = await axios.get(endPoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    handleServerErrors(error);
+    // throw new Error("Event not found");
+  }
+};
+
 const updateEvent = async (event) => {
   try {
     const token = localStorage.getItem("token");
@@ -91,6 +107,7 @@ export const eventService = {
   createEvent,
   getEvents,
   getEvent,
+  getEventG,
   updateEvent,
   deleteEvent,
 }

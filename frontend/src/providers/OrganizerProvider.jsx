@@ -8,9 +8,10 @@ import {
 import { OrganizerService } from "../services/organizerService";
 
 const OrganizerContext = createContext();
-
 const OrganizerProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [organizerEvents, setOrganizerEvents] = useState([]);
+  const [reservations, setReservations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getOrganizerProfile = useCallback(async (id, callback) => {
     setIsLoading(true);
@@ -38,12 +39,11 @@ const OrganizerProvider = ({ children }) => {
     }
   }, []);
 
-  const getOrganizerEvents = useCallback(async (id, callback) => {
+  const getOrganizerEvents = useCallback(async (id) => {
     setIsLoading(true);
     try {
       const res = await OrganizerService.getOrganizerEvents(id);
-      if (callback) callback(res);
-      return res;
+      setOrganizerEvents(res.events);
     } catch (error) {
       console.log(error);
     } finally {
@@ -52,15 +52,14 @@ const OrganizerProvider = ({ children }) => {
   }, []);
 
   const getOrganizerEventReservations = useCallback(
-    async (organizerId, eventId, callback) => {
+    async (organizerId, eventId) => {
       setIsLoading(true);
       try {
         const res = await OrganizerService.getOrganizerEventReservations(
           organizerId,
           eventId
         );
-        if (callback) callback(res);
-        return res;
+        setReservations(res.reservations);
       } catch (error) {
         console.log(error);
       } finally {
@@ -70,6 +69,10 @@ const OrganizerProvider = ({ children }) => {
     []
   );
 
+  const clearReservations = useCallback(() => {
+    setReservations([]);
+  }, []);
+
   const value = useMemo(
     () => ({
       isLoading,
@@ -77,8 +80,14 @@ const OrganizerProvider = ({ children }) => {
       updateOrganizerProfile,
       getOrganizerEvents,
       getOrganizerEventReservations,
+      organizerEvents,
+      reservations,
+      clearReservations,
     }),
     [
+      organizerEvents,
+      reservations,
+      clearReservations,
       isLoading,
       getOrganizerProfile,
       updateOrganizerProfile,

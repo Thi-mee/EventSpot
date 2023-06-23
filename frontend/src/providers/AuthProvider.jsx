@@ -35,9 +35,10 @@ const AuthProvider = ({ children }) => {
   }, [handleAuthenticationError]);
 
   const registerUser = useCallback(
-    async (name, email, password, password_confirmation) => {
+    async (data) => {
       setIsLoading(true);
       try {
+        const { name, email, password, password_confirmation } = data;
         const user = await authService.registerUser(
           name,
           email,
@@ -107,9 +108,12 @@ const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       await authService.logout();
-      setClient(null);
     } catch (error) {
       handleAuthenticationError(error.message);
+    } finally {
+      window.location.pathname = "/";
+      window.location.reload();
+      setClient(null);
     }
   }, [handleAuthenticationError]);
 

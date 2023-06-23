@@ -11,11 +11,13 @@ const EventContext = createContext();
 
 const EventProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [events, setEvents] = useState([]);
 
   const createEvent = useCallback(async (event, callback) => {
     setIsLoading(true);
     try {
       const res = await eventService.createEvent(event);
+      setEvents(prev => prev.push(res.event))
       if (callback) callback(res);
       return res;
     } catch (error) {
@@ -29,6 +31,7 @@ const EventProvider = ({ children }) => {
     setIsLoading(true);
     try {
       const res = await eventService.getEvents();
+      setEvents(res.events);
       if (callback) callback(res);
       return res;
     } catch (error) {
@@ -42,6 +45,18 @@ const EventProvider = ({ children }) => {
     setIsLoading(true);
     try {
       const res = await eventService.getEvent(id);
+      if (callback) callback(res);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+  
+  const getEventG = useCallback(async (id, callback) => {
+    setIsLoading(true);
+    try {
+      const res = await eventService.getEventG(id);
       if (callback) callback(res);
     } catch (error) {
       console.log(error);
@@ -78,14 +93,25 @@ const EventProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
+      events,
       isLoading,
       createEvent,
       getEvents,
       getEvent,
+      getEventG,
       updateEvent,
       deleteEvent,
     }),
-    [isLoading, createEvent, getEvent, getEvents, updateEvent, deleteEvent]
+    [
+      events,
+      isLoading,
+      createEvent,
+      getEvent,
+      getEventG,
+      getEvents,
+      updateEvent,
+      deleteEvent,
+    ]
   );
 
   return (

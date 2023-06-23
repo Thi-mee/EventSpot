@@ -46,7 +46,7 @@ const getUserReservations = async (id) => {
 }
 
 
-export {
+export const UserService = {
   getUserProfile,
   updateUserProfile,
   getUserReservations
