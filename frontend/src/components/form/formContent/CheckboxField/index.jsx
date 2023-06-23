@@ -7,8 +7,9 @@ const CheckboxField = ({
   label,
   placeholder,
   onChange,
-  errorText,
-  checked,
+  error,
+  value,
+  ...rest
 }) => {
   const handleChange = (e) => {
     const newEvent = {
@@ -28,12 +29,18 @@ const CheckboxField = ({
         id={name}
         placeholder={placeholder ?? undefined}
         onChange={handleChange}
-        checked={checked}
+        checked={value}
       />
       <label htmlFor={name} className={required ? style.required : null}>
         {label}
       </label>
-      <p className={style.errorText}>{errorText ?? null}</p>
+      <div className={style.extratext}>
+        {rest.errorText ? (
+          <p className={style.errorText}>{error}</p>
+        ) : rest.helperText ? (
+          <p className={style.helperText}>{rest.helperText}</p>
+        ) : null}
+      </div>
     </div>
   );
 };

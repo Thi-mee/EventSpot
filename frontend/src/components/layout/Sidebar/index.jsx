@@ -41,7 +41,8 @@ const Sidebar = ({ title }) => {
           {client?.role === "user" ? (
             <>
               <LinkTab to="/user/dashboard" iconName="home" text="Dashboard" />
-              <LinkTab to="/user/events" iconName="event" text="My Events" />
+              <LinkTab to="/user/reservations" iconName="list" text="Reservations" />
+              <LinkTab to="/user/events" iconName="event" text="Events" />
               <LinkTab
                 to="/user/settings"
                 iconName="settings"

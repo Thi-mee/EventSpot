@@ -16,6 +16,7 @@ const FormContent = ({
   errors,
   submitError,
   validate,
+  required,
 }) => {
   return (
     <div className={style.formContent}>
@@ -27,6 +28,7 @@ const FormContent = ({
             value: formData[child.props.name],
             error: errors[child.props.name],
             validate: () => validate(child),
+            required: child.props.required ?? required,
           });
         }
 
@@ -39,6 +41,7 @@ const FormContent = ({
                   value: formData[child.props.name],
                   error: errors[child.props.name],
                   validate: () => validate(child),
+                  required: child.props.required ?? required,
                 });
               }
               return child;

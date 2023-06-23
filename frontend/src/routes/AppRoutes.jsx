@@ -13,7 +13,10 @@ import ReservePage from "../views/ReservePage";
 
 // User Pages
 import UserDashboardPage from "../views/UserPage";
+import ReservationsPage from "../views/UserPage/ReservationsPage";
 import EventsPage from "../views/UserPage/EventsPage";
+import EventPage from "../views/UserPage/EventPage";
+import SettingsPage from "../views/UserPage/SettingsPage";
 
 // Organizer Pages
 import OrganizerPage from "../views/OrganizerPage";
@@ -36,8 +39,11 @@ const AppRoutes = () => {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/reserve/:id" element={<ReservePage />} />
       <Route path="/user" element={<Layout sidebar />}>
-        <Route path="dashboard" element={<UserDashboardPage />} />
+        <Route index path="dashboard" element={<UserDashboardPage />} />
+        <Route path="reservations" element={<ReservationsPage />} />
         <Route path="events" element={<EventsPage />} />
+        <Route path="event/:id" element={<EventPage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
 
       {/* <Route path="/user" element={<ProtectedRoutes />}>
@@ -45,7 +51,7 @@ const AppRoutes = () => {
         </Route> */}
 
       <Route path="/organizer" element={<Layout sidebar />}>
-        <Route path="dashboard" element={<OrganizerPage />} />
+        <Route index path="dashboard" element={<OrganizerPage />} />
         <Route path="events" element={< OrgEventsPage/>} />
         <Route path="create-event" element={<CreateEventPage />} />
         <Route path="event/:id" element={<OrgEventPage />} />

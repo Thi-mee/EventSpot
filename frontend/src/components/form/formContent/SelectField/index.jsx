@@ -36,7 +36,13 @@ const SelectField = ({
           </option>
         ))}
       </select>
-      <p className={styles.errorText}>{error ?? null}</p>
+      <div className={styles.extratext}>
+        {error ? (
+          <p className={styles.errorText}>{rest.errorText ?? error}</p>
+        ) : rest.helperText ? (
+          <p className={styles.helperText}>{rest.helperText}</p>
+        ) : null}
+      </div>
     </div>
   );
 };

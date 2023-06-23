@@ -1,44 +1,54 @@
 import React from "react";
-import withOrganizerAuthentication from "../../../components/HOC/withAuth";
-// import style from "./CreateEventPage.module.css";
-import {
-  Form,
-  FormContent,
-  FormHeader,
-} from "../../../components/form";
+import { Form, FormContent, FormHeader } from "../../../components/form";
 import Flex from "../../../components/layout/Flex";
 import { useEventContext } from "../../../providers/EventProvider";
+import dayjs from "dayjs";
+import withAuth from "../../../components/HOC/withAuth";
 
-const CreateEventPage = () => {
+const CreateEventPage = ({user}) => {
   const { isLoading, createEvent } = useEventContext();
 
   const handleSubmission = (data) => {
-    console.log(data)
-    // createEvent(data, (res) => {
-    //   console.log(res);
-    //   if (res.success) {
-    //     alert("Event Created Successfully");
-    //   }
-    // });
+    data.date = dayjs(data.date).format('DD-MM-YYYY');
+    console.log(data);
+    createEvent(data, (res) => {
+      if (res.error) throw new Error("Error creating event");
+      console.log(res);
+      if (res.success) {
+        alert("Event Created Successfully");
+      }
+    });
   };
 
   return (
-    <div>
-      {isLoading && <p>Loading...</p>}
-      <Form 
+    <div style={{
+      position: "relative",
+    }}>
+      {isLoading && <div style={{
+        position: "absolute",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+        width: "100%",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        zIndex: 100,
+      }}><p>Loading...</p></div>}
+      <Form
         initialState={{
           name: "",
           description: "",
           category: "",
           type: "",
           location: "",
-          date: "",
-          time: "",
-          seats: "",
+          date: new Date().toISOString().substring(0, 10),
+          time: dayjs().format("HH:mm"),
+          totalNumberOfSeats: 1,
+          organizerId: user?.id,
         }}
-        width="full" 
+        width="full"
         onSubmit={handleSubmission}
-        >
+        required>
         <FormHeader
           title="Create Event"
           subtitle="Fill in your Event Details in the fields below"
@@ -48,7 +58,6 @@ const CreateEventPage = () => {
             label="Event Name"
             name="name"
             placeholder="Enter the name of your event"
-            required={true}
           />
           <FormContent.TextField
             label="Event Description"
@@ -81,17 +90,21 @@ const CreateEventPage = () => {
             />
           </Flex>
           <FormContent.TextField
-            required={false}
             label="Event Location"
             name="location"
             placeholder="Enter a Location for your event"
             type="textarea"
-            helperText="If not Online, Enter the location of your event"
           />
           <Flex gap={1}>
             <FormContent.DateField label="Start Date" name="date" />
             <FormContent.TimeField label="Start Time" name="time" />
-          <FormContent.TextField label="No of Reservations" name="seats" type="number" />
+            <FormContent.TextField
+              label="Total Number of Seats"
+              name="totalNumberOfSeats"
+              type="number"
+              width="third"
+              min={1}
+            />
           </Flex>
           <Form.SubmitBtn />
         </FormContent>
@@ -118,4 +131,4 @@ const CreateEventPage = () => {
   );
 };
 
-export default withOrganizerAuthentication(CreateEventPage);
+export default withAuth(CreateEventPage);

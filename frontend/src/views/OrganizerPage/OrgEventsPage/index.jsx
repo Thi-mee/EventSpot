@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
-import withOrganizerAuthentication from "../../../components/HOC/withAuth";
-import dayjs from "dayjs";
 import style from "../style.module.css";
 import Modal from "../../../components/modal";
 import QRCode from "react-qr-code";
 import { useOrganizerContext } from "../../../providers/OrganizerProvider";
+import withAuth from "../../../components/HOC/withAuth";
 
-const OrgEventsPage = ({ navigate }) => {
-  const [events, setEvents] = React.useState([]);
-  const { isLoading, getOrganizerEvents } = useOrganizerContext();
+const OrgEventsPage = ({ navigate, user }) => {
+  const { isLoading, getOrganizerEvents, organizerEvents } =
+    useOrganizerContext();
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedId, setSelectedId] = React.useState("");
 
   useEffect(() => {
-    getOrganizerEvents((res) => setEvents(res.events));
-  }, [getOrganizerEvents]);
+    if (!organizerEvents.length) getOrganizerEvents(user?._id);
+  }, [getOrganizerEvents, user?._id, organizerEvents]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -33,7 +32,7 @@ const OrgEventsPage = ({ navigate }) => {
         doloribus cum beatae.
       </p>
       <Modal isOpen={isModalOpen} onClose={onClose}>
-        <h1>Modal</h1>
+        <h1>Share</h1>
 
         <div className={style.modal__content}>
           <div className={style.modal__content__left}>
@@ -69,7 +68,6 @@ const OrgEventsPage = ({ navigate }) => {
           <tr>
             <th>S/N</th>
             <th>Name</th>
-            <th>Reservations</th>
             <th>Event Type</th>
             <th>Location</th>
             <th>Date</th>
@@ -77,28 +75,24 @@ const OrgEventsPage = ({ navigate }) => {
           </tr>
         </thead>
         <tbody>
-                {console.log(events)}
-          {events.map((event, index) => {
+          {organizerEvents.map((event, index) => {
             return (
               <tr key={event._id}>
                 <td>{index + 1}</td>
                 <td>{event.name}</td>
-                <td>
-                  {event.reservations.length}/{event.seats}
-                </td>
-                <td>{event.type}</td>
+                <td>{event.type[0].toUpperCase() + event.type.slice(1)}</td>
                 <td>{event.location}</td>
-                <td>{dayjs(event.startDate).format("DD/MM/YYYY")}</td>
+                <td>{event.date}</td>
                 <td>
                   <button
-                    className={"" + style.btn + " " + style.btnDetails}
+                    className={`${style.btn} ${style.btnDetails} ${style.btnSm}`}
                     onClick={() =>
                       navigate("/organizer/event/" + event._id.toString())
                     }>
                     Details
                   </button>
                   <button
-                    className={"" + style.btn + " " + style.btnPrimary}
+                    className={`${style.btn} ${style.btnPrimary} ${style.btnSm}`}
                     onClick={() => {
                       setIsModalOpen(true);
                       setSelectedId(event._id.toString());
@@ -115,4 +109,4 @@ const OrgEventsPage = ({ navigate }) => {
   );
 };
 
-export default withOrganizerAuthentication(OrgEventsPage);
+export default withAuth(OrgEventsPage);

@@ -1,4 +1,3 @@
-
 .textField,
 .selectField {
   display: flex;
@@ -48,8 +47,8 @@
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 1.6rem;
-  padding: 10px;
+  font-size: 1.5rem;
+  padding: 7px 10px;
 }
 
 .textField input:focus,
@@ -68,15 +67,6 @@
 .selectField select:focus,
 .selectField select:valid {
   color: #000;
-}
-
-.textField .errorText,
-.selectField .errorText {
-  color: #dc2b2b;
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin: 3px 0 0;
-  height: 20px;
 }
 
 .checkboxField {
@@ -112,3 +102,18 @@
   flex-basis: 25%;
 }
 
+.extratext {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 2px 0 2px;
+  height: 20px;
+  text-transform: capitalize;
+}
+
+.errorText {
+  color: #d85757db;
+}
+
+.helperText {
+  color: #999;
+}

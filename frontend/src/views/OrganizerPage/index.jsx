@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import withOrganizerAuthentication from "../../components/HOC/withAuth";
+import withAuth from "../../components/HOC/withAuth";
 import style from "./style.module.css";
+import { useOrganizerContext } from "../../providers/OrganizerProvider";
 
-const OrganizerPage = () => {
+const OrganizerPage = ({ user, navigate }) => {
+  const { organizerEvents, getOrganizerEvents, isLoading } =
+    useOrganizerContext();
+
+  useEffect(() => {
+    if (!organizerEvents.length) {
+      getOrganizerEvents(user?._id);
+    }
+  }, [organizerEvents, getOrganizerEvents, user?._id]);
+
+  if (isLoading) {
+    return (
+      <div className={style.skeleton}>
+        <header>
+          <h1>Dashboard</h1>
+          <Link to="/organizer/create-event" className={style.fixedCtab}>
+            Create Event
+          </Link>
+        </header>
+        <main>
+          <span></span><span></span>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className={style.page}>
       <header>
@@ -18,7 +44,7 @@ const OrganizerPage = () => {
           <div className={style.analytics}>
             <div className={style.analytics__item}>
               <h3>Active Events</h3>
-              <p>0</p>
+              <p>{organizerEvents.length}</p>
             </div>
             <div className={style.analytics__item}>
               <h3>Upcoming Events</h3>
@@ -30,30 +56,16 @@ const OrganizerPage = () => {
         <div className={style.right}>
           <h2>Upcoming Events</h2>
           <div className={style.events}>
-            <div className={style.event}>
-              {/* <div className="event__image"></div> */}
-              <div className={style.event__details}>
-                <h3>Event Name</h3>
-                <p>Date: Jan 3, 2023</p>
-                <p>Event Location</p>
+            {organizerEvents.slice(0, 2).map((event) => (
+              <div className={style.event} key={event._id}>
+                {/* <div className="event__image"></div> */}
+                <div className={style.event__details}>
+                  <h3>{event.name}</h3>
+                  <p>Date: {event.date}</p>
+                  <p>Event Location: {event.location}</p>
+                </div>
               </div>
-            </div>
-            <div className={style.event}>
-              {/* <div className="event__image"></div> */}
-              <div className={style.event__details}>
-                <h3>Event Name</h3>
-                <p>Date: Jan 3, 2023</p>
-                <p>Event Location</p>
-              </div>
-            </div>
-            <div className={style.event}>
-              {/* <div className="event__image"></div> */}
-              <div className={style.event__details}>
-                <h3>Event Name</h3>
-                <p>Date: Jan 3, 2023</p>
-                <p>Event Location</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </main>
@@ -61,4 +73,4 @@ const OrganizerPage = () => {
   );
 };
 
-export default withOrganizerAuthentication(OrganizerPage);
+export default withAuth(OrganizerPage);

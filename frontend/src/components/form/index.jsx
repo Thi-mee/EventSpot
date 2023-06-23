@@ -11,6 +11,11 @@ import { modifyData, getFormCtnClasses } from "./helper";
 
 const formValidate = (formData) => {
   const errors = {};
+  Object.keys(formData).forEach((key) => {
+    if (!formData[key]) {
+      errors[key] = `${key} is required`;
+    }
+  });
 
   return errors;
 };
@@ -101,6 +106,7 @@ const MForm = ({
               formData,
               errors,
               submitError,
+              required,
               validate: validateChild,
             });
           }
@@ -110,7 +116,6 @@ const MForm = ({
     </div>
   );
 };
-
 
 const Form = memo(MForm);
 

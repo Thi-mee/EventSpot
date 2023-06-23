@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import withOrganizerAuthentication from "../../../components/HOC/withAuth";
 import { useParams } from "react-router-dom";
-import { useEventContext } from "../../../providers/EventProvider";
-import dayjs from "dayjs";
+import { useOrganizerContext } from "../../../providers/OrganizerProvider";
 import style from "./style.module.css";
-import Flex from "../../../components/layout/Flex";
+import withAuth from "../../../components/HOC/withAuth";
+import Modal from "../../../components/modal";
+import QRCode from "react-qr-code";
 
-const OrgEventPage = () => {
-  const [button, setButton] = useState([
+const OrgEventPage = ({ user }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const button = [
     {
       text: "Edit",
       icon: "edit",
@@ -22,15 +24,37 @@ const OrgEventPage = () => {
         console.log("save");
       },
     },
-  ]);
+  ];
+
   const [isEdit, setIsEdit] = useState(false);
-  const [event, setEvent] = useState({}); // [event, setEvent
+  const {
+    getOrganizerEvents,
+    getOrganizerEventReservations,
+    isLoading,
+    organizerEvents,
+    reservations,
+    clearReservations,
+  } = useOrganizerContext();
   const id = useParams().id;
-  const { getEvent, isLoading } = useEventContext();
+  const event = organizerEvents.find((event) => event._id === id);
 
   useEffect(() => {
-    getEvent(id, (res) => setEvent(res.event));
-  }, [getEvent, id]);
+    if (!event) {
+      getOrganizerEvents(user?._id);
+    }
+    getOrganizerEventReservations(user?._id, id);
+
+    return () => {
+      clearReservations();
+    };
+  }, [
+    getOrganizerEvents,
+    event,
+    getOrganizerEventReservations,
+    id,
+    user?._id,
+    clearReservations,
+  ]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -48,51 +72,63 @@ const OrgEventPage = () => {
             <button className={style.ctab} onClick={button[0].onClick}>
               <span className="material-symbols-outlined">edit</span> Edit
             </button>
-            <button>
+            <button onClick={() => setIsModalOpen(true)}>
               <span className="material-symbols-outlined">share</span> Share
             </button>
           </div>
         )}
         <div className={style.aboutEvent}>
-          <h1>{event.name}</h1>
+          <h1>{event?.name}</h1>
           <p>
             Description:{" "}
-            <span className={style.value}>{event.description}</span>
+            <span className={style.value}>{event?.description}</span>
           </p>
-          <Flex gap="2">
-            <p>
-              Start Date:{" "}
-              <span className={style.value}>
-                {dayjs(event.startDate).format("DD/MM/YYYY")}
-              </span>
-            </p>
-            <p>
-              End Date:{" "}
-              <span className={style.value}>
-                {dayjs(event.endDate).format("DD/MM/YYYY")}
-              </span>
-            </p>
-          </Flex>
-          <Flex gap="2">
-            <p>
-              Start Time: <span className={style.value}>{event.startTime}</span>
-            </p>
-            <p>
-              End Time: <span className={style.value}> {event.endTime}</span>
-            </p>
-          </Flex>
           <p>
-            Location: <span className={style.value}> {event.location}</span>
+            Start Date: <span className={style.value}>{event?.date}</span>
+          </p>
+          <p>
+            Start Time: <span className={style.value}>{event?.time}</span>
+          </p>
+          <p>
+            Location: <span className={style.value}> {event?.location}</span>
           </p>
         </div>
       </header>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h1>Share</h1>
+
+        <div className={style.modal__content}>
+          <div className={style.modal__content__left}>
+            <h2>Share this event</h2>
+
+            <div className={style.modal__content__left__buttons}>
+              <button className="btn btn-primary">Share on Facebook</button>
+              <button className="btn btn-primary">Share on Twitter</button>
+              <button
+                className="btn btn-primary"
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    "https://localhost:3000/reserve/" + id
+                  )
+                }>
+                {" "}
+                Copy Link
+              </button>
+            </div>
+          </div>
+          <div className={style.modal__content__right}>
+            <h3>Or download this qr code and share</h3>
+            <QRCode size={150} value={"https://localhost:3000/reserve/" + id} />
+          </div>
+        </div>
+      </Modal>
       <main>
         <h2>Reservations</h2>
-        {console.log(event.reservations)}
-        {event.reservations?.length === 0 ? (
+        {console.log(reservations)}
+        {reservations?.length === 0 ? (
           <p>No reservations yet</p>
         ) : (
-          event.reservations?.map((reservation, index) => (
+          reservations?.map((reservation, index) => (
             <table>
               <thead>
                 <tr>
@@ -129,4 +165,4 @@ const OrgEventPage = () => {
   );
 };
 
-export default withOrganizerAuthentication(OrgEventPage);
+export default withAuth(OrgEventPage);

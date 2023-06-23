@@ -9,46 +9,38 @@ const getTimeClasses = (styles, props) => {
 };
 
 const TimePicker = ({ onChange, value }) => {
-  console.log(value);
-  const handleChange = (e, i) => {
-    console.log(e.target.value);
-    // check if its the hours or minutes input
-    if (i === 1) {
-      if (isNaN(e.target.value)) {
-        e.target.value = value.split(":")[0];
-        return;
-      }
+  const handleHoursChange = (e) => {
+    let newHour = parseInt(e.target.value);
+    if (isNaN(newHour)) return;
+    if (newHour.length > 2) return;
+    if (parseInt(newHour) > 23) newHour = 23;
+    if (parseInt(newHour) < 0) newHour = 0;
+    if (newHour.toString().length === 1) {
+      newHour = "0" + newHour;
+    }
 
-      if (parseInt(e.target.value) > 23) {
-        e.target.value = 23;
-      } else if (parseInt(e.target.value) < 0) {
-        e.target.value = 0;
-      } else if (e.target.value.length === 1) {
-        e.target.value = "0" + e.target.value;
-      }
-    } else {
-      if (isNaN(e.target.value)) {
-        e.target.value = value.split(":")[1];
-        return;
-      }
+    const newEvent = {
+      target: {
+        type: "time",
+        value: `${newHour}:${value.split(":")[1]}`,
+      },
+    };
+    onChange(newEvent);
+  };
 
-      if (parseInt(e.target.value) > 59) {
-        e.target.value = 59;
-      }
-      if (parseInt(e.target.value) < 0) {
-        e.target.value = 0;
-      }
-      if (e.target.value.length === 1) {
-        e.target.value = "0" + e.target.value;
-      }
+  const handleMinutesChange = (e) => {
+    let newMinutes = parseInt(e.target.value);
+    if (newMinutes.length > 2) return;
+    if (isNaN(newMinutes)) return;
+    if (parseInt(newMinutes) > 59) newMinutes = 59;
+    if (parseInt(newMinutes) < 0) return;
+    if (newMinutes.toString().length === 1) {
+      newMinutes = "0" + newMinutes;
     }
     const newEvent = {
       target: {
         type: "time",
-        value:
-          i === 1
-            ? `${e.target.value}:${value.split(":")[1]}`
-            : `${value.split(":")[0]}:${e.target.value}`,
+        value: `${value.split(":")[0]}:${newMinutes}`,
       },
     };
     onChange(newEvent);
@@ -61,7 +53,7 @@ const TimePicker = ({ onChange, value }) => {
           <input
             id="hours"
             value={value.split(":")[0]}
-            onChange={(e) => handleChange(e, 1)}
+            onChange={handleHoursChange}
             placeholder="--"
             max={23}
             min={0}
@@ -75,7 +67,7 @@ const TimePicker = ({ onChange, value }) => {
           <input
             id="minutes"
             value={value.split(":")[1]}
-            onChange={(e) => handleChange(e, 2)}
+            onChange={handleMinutesChange}
             placeholder="--"
             min={0}
             max={59}
@@ -100,12 +92,20 @@ const TimeField = ({
 }) => {
   return (
     <div className={getTimeClasses(styles, rest)}>
-      <label htmlFor="time">{label}</label>
+      <label htmlFor="time" className={required ? styles.required : null}>
+        {label}
+      </label>
       <TimePicker
         value={value}
         onChange={(event) => onChange({ target: { ...event.target, name } })}
       />
-      <p className={styles.errorText}>{error ?? null}</p>
+      <div className={styles.extratext}>
+        {error ? (
+          <p className={styles.errorText}>{rest.errorText ?? error}</p>
+        ) : rest.helperText ? (
+          <p className={styles.helperText}>{rest.helperText}</p>
+        ) : null}
+      </div>
     </div>
   );
 };
@@ -114,8 +114,10 @@ const DateField = ({
   name = "date",
   label = "Date",
   onChange,
-  errorText,
+  error,
   required,
+  value,
+  ...rest
 }) => {
   return (
     <div className={styles.dateField}>
@@ -123,9 +125,21 @@ const DateField = ({
         {label}
       </label>
       <div className={timeStyles.dateWrapper}>
-        <input type="date" name={name} id="date" onChange={onChange} />
+        <input
+          type="date"
+          name={name}
+          id="date"
+          onChange={onChange}
+          value={value}
+        />
       </div>
-      <p className={styles.errorText}>{errorText ?? null}</p>
+      <div className={styles.extratext}>
+        {rest.errorText ? (
+          <p className={styles.errorText}>{error}</p>
+        ) : rest.helperText ? (
+          <p className={styles.helperText}>{rest.helperText}</p>
+        ) : null}
+      </div>
     </div>
   );
 };

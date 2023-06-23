@@ -5,11 +5,9 @@
     var(--color-primary-light)
   );
   color: #fff;
-  padding: 20px;
-  height: 270px;
+  padding: 20px 5em;
+  height: 200px;
   width: 100%;
-  /* display: flex; */
-  border-radius: 10px;
   margin-bottom: 20px;
   overflow: hidden;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
@@ -26,4 +24,8 @@
   bottom: 20px;
   right: 40px;
   font-size: 2rem;
+}
+
+.page main {
+  padding-bottom: 5em;
 }

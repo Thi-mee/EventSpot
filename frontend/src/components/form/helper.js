@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 const VALIDFORMFIELDS = [
   "TextField",
   "CheckboxField",
@@ -57,21 +55,21 @@ export const isValidButton = (child) => BUTTONS.includes(child?.type?.type?.name
 
 export const modifyData = (prevFormObj, target) => {
   const { name, value, type } = target;
-  if (type === 'date') {
-    return {
-      ...prevFormObj,
-      [name]: dayjs(value).format('DD-MM-YYYY')
-    }
-  }
+  
   if (type === 'number') {
+    if (prevFormObj[name] === 0 && value === '') {
+      return prevFormObj;
+    }
+    const num = value === '' ? 0 : parseInt(value);
+    console.log(num)
     return {
       ...prevFormObj,
-      [name]: parseInt(value)
+      [name]: num
     }
   }
   return {
     ...prevFormObj,
-    [name]: value
+    [name]: value ?? ''
   }
 }
 

@@ -4,9 +4,9 @@ import styles from "./Layout.module.css";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ title }) => {
-  const { client, isLoading } = useAuth();
+  const { client, isLoading, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownGroupRef = useRef(null);
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
@@ -15,7 +15,7 @@ const Navbar = ({ title }) => {
   useEffect(() => {
     // close dropdown when clicked outside
     const closeDropdown = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      if (!dropdownGroupRef?.current?.contains(e.target) && dropdownOpen) {
         setDropdownOpen(false);
       }
     };
@@ -23,7 +23,7 @@ const Navbar = ({ title }) => {
     return () => {
       document.removeEventListener("mousedown", closeDropdown);
     };
-  }, []);
+  }, [dropdownOpen]);
   return (
     <header className={styles.navbar}>
       <div className={styles.wrapper}>
@@ -33,15 +33,6 @@ const Navbar = ({ title }) => {
             <ul>
               {!client && (
                 <>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Features</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Pricing</Link>
-                  </li>
                   <li>
                     <Link to="/login" className="ctab">
                       Login as user
@@ -70,16 +61,19 @@ const Navbar = ({ title }) => {
                     </Link>
                   </li>
                 )} */}
+                  {window.location.pathname === "/" && (
+                    <li>
+                      <Link to={`/${client.role}/dashboard`}>Dashboard</Link>
+                    </li>
+                  )}
                   <li>
                     <span className={styles.greeting}>
                       Hi <span>{client.name}</span>
                     </span>
                   </li>
                   <li>
-                    <div className={styles.dropdownCtn}
-                      onClick={toggleDropdown}
-                      ref={dropdownRef}>
-                      <div className={styles.avatar}>
+                    <div className={styles.dropdownCtn} ref={dropdownGroupRef}>
+                      <div className={styles.avatar} onClick={toggleDropdown}>
                         {client.avatar && (
                           <img src={client.avatar} alt="avatar" />
                         )}
@@ -96,7 +90,7 @@ const Navbar = ({ title }) => {
                       {dropdownOpen && (
                         <div className={styles.dropdown}>
                           <ul>
-                            <li>
+                            <li onClick={() => logout()}>
                               <span className="material-symbols-outlined">
                                 Logout
                               </span>

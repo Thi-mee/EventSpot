@@ -1,4 +1,4 @@
-.page {
+.page{
   position: relative;
   width: 97%;
   max-width: 850px;
@@ -7,7 +7,7 @@
 .page header {
   margin-bottom: 2em;
 }
-.page h1 {
+.page h1{
   font-size: 2rem;
   margin: 0;
   color: #444;
@@ -109,6 +109,7 @@
   background-color: #fcfcfc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  text-overflow: ellipsis;
 }
 
 .page table th,
@@ -116,6 +117,9 @@
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  /* overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
 }
 
 .page table th {
@@ -199,3 +203,77 @@
   background-color: rgb(58, 184, 201);
   color: #fff;
 }
+
+.page .btnSm {
+  padding: 6px 12px;
+  font-size: 1.4rem;
+}
+
+
+/* Should create a skeleton for page itself */
+.skeleton {
+  position: relative;
+  width: 97%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.skeleton header {
+  margin-bottom: 2em;
+}
+
+.skeleton h1{
+  font-size: 2rem;
+  margin: 0;
+  color: #444;
+}
+
+.skeleton h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #000;
+}
+
+.skeleton .fixedCtab {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.skeleton main {
+  --content-width: 49%;
+  display: flex;
+  gap: 2%;
+}
+
+
+/* There are just 3 empty spans in this main tag. Just style it and give in a nice animation so it's obbvious something is loading
+ */
+.skeleton span {
+  width: var(--content-width);
+  height: 100px;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  animation: loading 1s infinite;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+
