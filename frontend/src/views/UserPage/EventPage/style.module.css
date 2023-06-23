@@ -1,0 +1,185 @@
+.page {
+  position: relative;
+} 
+
+.page header {
+  min-height: 100px;
+  background-color: #fff;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.page header p {
+  margin: 0;
+}
+.page .ctab {
+  border: 0;
+  align-self: flex-end;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.page .ctab:hover {
+  background-color: var(--color-primary-dark);
+  scale: 1.1;
+}
+
+.page main {
+  margin-left: 2rem;
+  margin-top: 1.5em;
+}
+
+.page main h2 {
+  font-size: 2.1rem;
+  margin-bottom: 1rem;
+}
+
+.page h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.details__item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+
+.modal {
+  visibility: hidden;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: 230px;
+  max-width: 400px;
+  width: 90%;
+  padding: 2em;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+}
+
+.modal.show {
+  visibility: visible;
+}
+.modal__content {
+  position: relative;
+}
+.modal .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .7em 1em;
+  background-color: rgb(235, 64, 64);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.modal .close:hover {
+  background-color: rgb(235, 64, 64, 0.8);
+}
+
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.form__group label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form__group input {
+  padding: .5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1.5rem;
+}
+
+.form__group input:focus {
+  outline: 1px solid var(--color-primary);
+}
+
+.helperText {
+  font-size: 1.3rem;
+  color: #999;
+}
+
+.btn {
+  padding: .5em 1em;
+  border-radius: 0.5rem;
+  border: 0;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.btn.btnSm {
+  padding: .4em .8em;
+  font-size: 1.3rem;
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: 230px;
+  max-width: 400px;
+  width: 90%;
+  padding: 2em;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* there are 3 empty divs on the loader. Animate them */
+.loader div {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  animation: loader 0.5s ease-in-out infinite alternate;
+}
+
+.loader div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loader {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1rem);
+  }
+}

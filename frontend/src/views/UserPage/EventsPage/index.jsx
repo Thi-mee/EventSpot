@@ -3,6 +3,7 @@ import { mockE } from "./mockE";
 import style from "./EventsP.module.css";
 import Card from "../../../components/card";
 import withAuth from "../../../components/HOC/withAuth";
+import { useEventContext } from "../../../providers/EventProvider";
 
 // const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 //   const pages = Array(totalPages).keys();
@@ -32,8 +33,8 @@ import withAuth from "../../../components/HOC/withAuth";
 //   );
 // };
 
-const EventsPage = () => {
-  const [data, setData] = useState([]);
+const EventsPage = ({navigate}) => {
+  const { events, getEvents } = useEventContext();
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
@@ -52,7 +53,7 @@ const EventsPage = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const displayedItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const displayedEvents = events.slice(indexOfFirstItem, indexOfLastItem);
 
   // const fetchData = async (pageNumber) => {
   //   try {
@@ -66,11 +67,11 @@ const EventsPage = () => {
   // };
 
   React.useEffect(() => {
-    setData(mockE);
-  }, []);
+    getEvents();
+  }, [getEvents]);
 
   return (
-    <div className={style.eventPage}>
+      <div className={style.eventPage}>
       <hgroup>
         <h1>Events</h1>
         <p>
@@ -78,37 +79,48 @@ const EventsPage = () => {
         </p>
       </hgroup>
       <div className={style.eventGrid}>
-        {displayedItems.map((item) => (
-          <Card key={item.id}>
+        {displayedEvents.map((event) => (
+          <Card key={event._id} className={style.eventCard}>
             <div className={style.imgCtn}>
-              <img src={item.imgUrl} alt="img" />
+              <img
+                src={`/assets/mock/mock${
+                  [1, 2, 3, 4, 5][Math.floor(Math.random() * 5)]
+                }.jpeg`}
+                alt="img"
+              />
             </div>
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
+            <h3>{event.name}</h3>
+            <p className={style.location}>{event.location}</p>
+            <p className={style.date} >{event?.date}</p>
+            <p>
+              Tag: <span className={style.tag}>{event.category}</span>
+            </p>
+            <button onClick={() => navigate(`/user/event/${event._id}`)}>Details</button>
           </Card>
         ))}
       </div>
-
-      <div className={style.paginationControls}>
-        {/* Render pagination controls */}
-        <button onClick={() => handlePageChange(1)}>First</button>
-        {Array.from({
-          length: calculateTotalPages(data.length, itemsPerPage),
-        }).map((_, index) => (
+      {events?.length > 10 && (
+        <div className={style.paginationControls}>
+          {/* Render pagination controls */}
+          <button onClick={() => handlePageChange(1)}>First</button>
+          {Array.from({
+            length: calculateTotalPages(events?.length, itemsPerPage),
+          }).map((_, index) => (
+            <button
+              className={currentPage === index + 1 ? style.active : null}
+              key={index}
+              onClick={() => handlePageChange(index + 1)}>
+              {index + 1}
+            </button>
+          ))}
           <button
-            className={currentPage === index + 1 ? style.active : null}
-            key={index}
-            onClick={() => handlePageChange(index + 1)}>
-            {index + 1}
+            onClick={() =>
+              handlePageChange(calculateTotalPages(events?.length, itemsPerPage))
+            }>
+            Last
           </button>
-        ))}
-        <button
-          onClick={() =>
-            handlePageChange(calculateTotalPages(data.length, itemsPerPage))
-          }>
-          Last
-        </button>
-      </div>
+        </div>
+      )}
     </div>
   );
 };

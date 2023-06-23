@@ -1,20 +1,19 @@
 import React from "react";
-
-import SearchBar from "../../components/searchBar";
-import CategoriesSection from "./components/CategoriesSection";
-import PopularEventsSection from "./components/PopularEventsSection";
-import { useAuth } from "../../providers/AuthProvider";
+import style from "./UserDashboardPage.module.css";
 import withAuth from "../../components/HOC/withAuth";
+import RecommendedEvents from "./components/RecommendedEvents";
+import UpcomingReservations from "./components/UpcomingReservations";
+import ReservationHistory from "./components/ReservationHistory";
 
-const UserDashboardPage = () => {
-  const { user } = useAuth();
+const UserDashboardPage = ({ user }) => {
   return (
-    <div>
+    <div className={style.dashboard}>
       <h1>User Dashboard</h1>
-      <h2>Welcome back, {user.name}</h2>
-      <SearchBar />
-      <CategoriesSection />
-      <PopularEventsSection />
+      <div className={style.flexDashboard}>
+        <ReservationHistory />
+        <UpcomingReservations />
+        <RecommendedEvents />
+      </div>
     </div>
   );
 };

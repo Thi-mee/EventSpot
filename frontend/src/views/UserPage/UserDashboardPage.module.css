@@ -1,0 +1,32 @@
+.dashboard {
+  width: 90%;
+  margin: auto;
+}
+
+.dashboard h1 {
+  font-size: 3rem;
+  margin-bottom: 1.2em;
+  margin-top: .5em;
+  color: #333;
+  text-transform: uppercase;
+
+}
+
+.flexDashboard {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.flexDashboard > * {
+  flex: 1;
+}
+
+.flexDashboard > * > h2 {
+  font-size: 1.5rem;
+  margin-bottom: .7em;
+  padding-block: .3em .7em;
+  color: #333;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ccc;
+}
