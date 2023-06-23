@@ -1,17 +1,14 @@
 const reservationRules = {
   seats: 'required|integer|minValue:1',
-  eventId: 'required|objectId',
-  userId: 'required|objectId'
+  event: 'required|objectId',
 };
 
 const reservationErrorMessages = {
   'required.seats': 'The seats field is required.',
   'integer.seats': 'The seats must be an integer.',
   'minValue.seats': 'The seats must be at least 1.',
-  'required.eventId': 'The event ID field is required.',
-  'objectId.eventId': 'The event ID must be a valid ID.',
-  'required.userId': 'The user ID field is required.',
-  'objectId.userId': 'The user ID must be a valid ID.'
+  'required.event': 'The event ID field is required.',
+  'objectId.event': 'The event ID must be a valid ID.',
 };
 
 const eventRules = {
@@ -90,8 +87,8 @@ const guestErrorMessages = {
   'email.email': 'The email must be a valid email address.',
   'min.name': 'The name must be at least 3 characters.',
   'max.name': 'The name may not be greater than 255 characters.',
-  'required.eventId': 'The event ID field is required.',
-  'objectId.eventId': 'The event ID must be a valid ID.',
+  'required.event': 'The event ID field is required.',
+  'objectId.event': 'The event ID must be a valid ID.',
   'required.seats': 'The seats field is required.',
   'integer.seats': 'The seats must be an integer.',
   'minValue.seats': 'The seats must be at least 1.',

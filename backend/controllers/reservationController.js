@@ -9,8 +9,10 @@ const createReservation = async (req, res, next) => {
 
     if (validator.passes()) {
       const newReservation = new Reservation({
-        user: req.user._id,
-        event: req.body.eventId,
+        userId: req.user._id,
+        name: req.user.name,
+        email: req.user.email,
+        event: req.body.event,
         seats: req.body.seats,
       });
       await newReservation.save();
@@ -74,7 +76,6 @@ const deleteReservationById = async (req, res, next) => {
 const createReservationAsGuest = async (req, res, next) => {
   try {
     const validator = new Validator(req.body, guestRules, guestErrorMessages);
-    
     if (validator.passes()) {
       const newReservation = new Reservation({
         name: req.body.name,

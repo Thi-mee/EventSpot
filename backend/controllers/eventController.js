@@ -5,6 +5,7 @@ const { eventRules, eventErrorMessages } = require('../helpers/validationRules')
 // Create a new event
 const createEvent = async (req, res, next) => {
   try {
+    console.log(req.body)
     const validator = new Validator(req.body, eventRules, eventErrorMessages);
 
     if (validator.passes()) {
@@ -95,10 +96,25 @@ const getAllEvents = async (req, res, next) => {
 };
 
 
+const getEventByIdG = async (req, res, next) => {
+  try {
+    const event = await Event.findById(req.params.id).populate('organizerId', 'name email');
+    if (!event) {
+      return res.status(404).json({ success: false, message: 'Event not found' });
+    }
+
+    res.json({ success: true, event });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   createEvent,
   getAllEvents,
   getEventById,
   updateEventById,
   deleteEventById,
+  getEventByIdG
 };

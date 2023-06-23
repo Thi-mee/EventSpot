@@ -41,16 +41,14 @@ app.use('/api/reservations', require('./routes/reservationRoutes'));
 // Error handler
 app.use((err, req, res, next) => {
   console.log("i am in use")
-  // console.log('Error handler', err, req, res, next);
-  // console.log(err);
-  // console.log(res)
-  // if (err.name === 'UnauthorizedError') {
-  //   console.log(err);
-  //   res.status(401).json({ error: 'Unauthorized' });
-  // }
-  // else {
-  //   res.status(500).json({ success: false, message: 'Something went wrong' });
-  // }
+  console.log(err);
+  if (err.name === 'UnauthorizedError') {
+    console.log(err);
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+  else {
+    res.status(500).json({ success: false, message: 'Something went wrong' });
+  }
 });
 
 // Connect to MongoDB Atlas

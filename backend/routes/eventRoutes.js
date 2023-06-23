@@ -44,5 +44,10 @@ router.get(
   eventController.getAllEvents
 );
 
+router.get(
+  '/:id/guest',
+  eventController.getEventByIdG
+)
+
 
 module.exports = router;
