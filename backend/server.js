@@ -54,7 +54,7 @@ app.use((err, req, res, next) => {
 // Connect to MongoDB Atlas
 require('./config/db').connectDb();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8083;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

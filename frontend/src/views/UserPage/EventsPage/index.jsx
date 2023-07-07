@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { mockE } from "./mockE";
 import style from "./EventsP.module.css";
 import Card from "../../../components/card";
 import withAuth from "../../../components/HOC/withAuth";

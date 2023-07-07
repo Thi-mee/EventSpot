@@ -50,7 +50,8 @@ const getOrganizerEvents = async (req, res, next) => {
 // Get a list of all reservations for an event
 const getEventReservations = async (req, res, next) => {
   try {
-    const reservations = await Reservation.find({ eventId: req.params.eventId }).populate('userId', 'name email');
+    const reservations = await Reservation.find({ event: req.params.eventId }).populate('userId', 'name email');
+
     res.json({ success: true, reservations });
   } catch (error) {
     next(error);

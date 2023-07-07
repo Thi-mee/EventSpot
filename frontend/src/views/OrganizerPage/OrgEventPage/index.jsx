@@ -34,6 +34,7 @@ const OrgEventPage = ({ user }) => {
     organizerEvents,
     reservations,
     clearReservations,
+    deleteReservationById,
   } = useOrganizerContext();
   const id = useParams().id;
   const event = organizerEvents.find((event) => event._id === id);
@@ -124,18 +125,17 @@ const OrgEventPage = ({ user }) => {
       </Modal>
       <main>
         <h2>Reservations</h2>
-        {console.log(reservations)}
         {reservations?.length === 0 ? (
           <p>No reservations yet</p>
         ) : (
           reservations?.map((reservation, index) => (
-            <table>
+            <table key={reservation._id}>
               <thead>
                 <tr>
                   <th>S/N</th>
                   <th> Name</th>
                   <th>Email</th>
-                  <th>PhoneNo</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -144,15 +144,15 @@ const OrgEventPage = ({ user }) => {
                   <td>{index + 1}</td>
                   <td>{reservation.name}</td>
                   <td>{reservation.email}</td>
-                  <td>{reservation.phone}</td>
-                  <td>
+                  <td>{reservation.status}</td>
+                  <td className={style.multiCta}>
                     <button className={style.ctab}>
                       <span className="material-symbols-outlined">edit</span>{" "}
-                      Edit
+                      <span>Edit</span>
                     </button>
-                    <button className={style.ctab}>
+                    <button className={style.ctab} onClick={() => deleteReservationById(reservation._id)}>
                       <span className="material-symbols-outlined">delete</span>{" "}
-                      Delete
+                      <span>Delete</span>
                     </button>
                   </td>
                 </tr>

@@ -56,7 +56,7 @@ const OrganizerPage = ({ user, navigate }) => {
         <div className={style.right}>
           <h2>Upcoming Events</h2>
           <div className={style.events}>
-            {organizerEvents.slice(0, 2).map((event) => (
+            {organizerEvents.slice(0, 3).map((event) => (
               <div className={style.event} key={event._id}>
                 {/* <div className="event__image"></div> */}
                 <div className={style.event__details}>

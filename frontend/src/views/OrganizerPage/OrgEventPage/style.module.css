@@ -115,3 +115,20 @@
   background-color: var(--color-primary);
   color: var(--color-white);
 }
+
+
+.multiCta {
+  display: flex;
+}
+
+ .page .multiCta .ctab{
+  padding: .3em 1em;
+  display: flex;
+  align-items: center;
+  gap: .3em;
+}
+
+.page .multiCta .ctab:first-child {
+  background-color: rgb(0, 41, 128);
+}
+
